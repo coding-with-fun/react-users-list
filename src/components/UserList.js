@@ -1,19 +1,19 @@
 import {
-    TableContainer,
+    Paper,
     Table,
     TableBody,
-    TableRow,
     TableCell,
+    TableContainer,
     TableHead,
-    Paper,
     TablePagination,
+    TableRow,
 } from '@material-ui/core';
-
-import React, { useContext, useState } from 'react';
+import React, { Fragment, useContext, useState } from 'react';
 import { UserContext } from '../context/UserContext';
+import UserModal from './UserModal';
 
 const UserList = () => {
-    const { userList } = useContext(UserContext);
+    const { userList, ToggleUserModal } = useContext(UserContext);
 
     const columns = ['Name', 'Email Address', 'City', 'State', 'Country'];
 
@@ -30,77 +30,86 @@ const UserList = () => {
     };
 
     return (
-        <Paper className='user_list__container'>
-            <TableContainer>
-                <Table stickyHeader aria-label='sticky table'>
-                    <TableHead className='table_header'>
-                        <TableRow>
-                            {columns.map((column) => {
-                                return (
-                                    <TableCell
-                                        key={column}
-                                        align={'center'}
-                                        className='table_header__cell'
-                                    >
-                                        {column}
-                                    </TableCell>
-                                );
-                            })}
-                        </TableRow>
-                    </TableHead>
-
-                    <TableBody>
-                        {userList.length > 0 &&
-                            userList
-                                .slice(
-                                    page * rowsPerPage,
-                                    page * rowsPerPage + rowsPerPage
-                                )
-                                .map((user) => {
-                                    const tempUserList = [
-                                        user.name.first + ' ' + user.name.last,
-                                        user.email,
-                                        user.location.city,
-                                        user.location.state,
-                                        user.location.country,
-                                    ];
+        <Fragment>
+            <Paper className='user_list__container'>
+                <TableContainer>
+                    <Table stickyHeader aria-label='sticky table'>
+                        <TableHead className='table_header'>
+                            <TableRow>
+                                {columns.map((column) => {
                                     return (
-                                        <TableRow
-                                            hover
-                                            role='checkbox'
-                                            tabIndex={-1}
-                                            key={user.id.value}
-                                            className='table_row'
+                                        <TableCell
+                                            key={column}
+                                            align={'center'}
+                                            className='table_header__cell'
                                         >
-                                            {tempUserList.map(
-                                                (userDetail, index) => {
-                                                    return (
-                                                        <TableCell
-                                                            key={index}
-                                                            align={'center'}
-                                                        >
-                                                            {userDetail}
-                                                        </TableCell>
-                                                    );
-                                                }
-                                            )}
-                                        </TableRow>
+                                            {column}
+                                        </TableCell>
                                     );
                                 })}
-                    </TableBody>
-                </Table>
-            </TableContainer>
+                            </TableRow>
+                        </TableHead>
 
-            <TablePagination
-                rowsPerPageOptions={[10, 25, 100]}
-                component='div'
-                count={userList.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onChangePage={handleChangePage}
-                onChangeRowsPerPage={handleChangeRowsPerPage}
-            />
-        </Paper>
+                        <TableBody>
+                            {userList.length > 0 &&
+                                userList
+                                    .slice(
+                                        page * rowsPerPage,
+                                        page * rowsPerPage + rowsPerPage
+                                    )
+                                    .map((user) => {
+                                        const tempUserList = [
+                                            user.name.first +
+                                                ' ' +
+                                                user.name.last,
+                                            user.email,
+                                            user.location.city,
+                                            user.location.state,
+                                            user.location.country,
+                                        ];
+                                        return (
+                                            <TableRow
+                                                hover
+                                                role='checkbox'
+                                                tabIndex={-1}
+                                                key={user.id.value}
+                                                className='table_row'
+                                                onClick={() =>
+                                                    ToggleUserModal(user, true)
+                                                }
+                                            >
+                                                {tempUserList.map(
+                                                    (userDetail, index) => {
+                                                        return (
+                                                            <TableCell
+                                                                key={index}
+                                                                align={'center'}
+                                                            >
+                                                                {userDetail}
+                                                            </TableCell>
+                                                        );
+                                                    }
+                                                )}
+                                            </TableRow>
+                                        );
+                                    })}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+
+                <TablePagination
+                    rowsPerPageOptions={[10, 25, 100]}
+                    component='div'
+                    count={userList.length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    onChangePage={handleChangePage}
+                    onChangeRowsPerPage={handleChangeRowsPerPage}
+                />
+            </Paper>
+
+            <UserModal />
+        </Fragment>
     );
 };
 

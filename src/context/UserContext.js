@@ -5,6 +5,8 @@ export const UserContext = createContext();
 
 export const UserProvider = (props) => {
     const [userList, setUserList] = useState([]);
+    const [userDetails, setUserDetails] = useState();
+    const [isUserDetailsModalOpen, setIsUserDetailsModalOpen] = useState(false);
 
     useEffect(() => {
         FetchUserDetails();
@@ -17,8 +19,21 @@ export const UserProvider = (props) => {
         setUserList([...results]);
     };
 
+    const ToggleUserModal = (value, flag) => {
+        console.log(value, flag);
+        setUserDetails(value);
+        setIsUserDetailsModalOpen(flag);
+    };
+
     return (
-        <UserContext.Provider value={{ userList }}>
+        <UserContext.Provider
+            value={{
+                userList,
+                userDetails,
+                isUserDetailsModalOpen,
+                ToggleUserModal,
+            }}
+        >
             {props.children}
         </UserContext.Provider>
     );
