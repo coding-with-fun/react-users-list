@@ -1,10 +1,30 @@
 .user_modal__container {
-    height: 20vh;
-    width: 20vw;
-    background: #ffffff;
+    height: 50vh;
+    width: 50vw;
     margin: auto;
 }
 
-.user_modal__container:focus {
+.user_modal__container:focus,
+.user_details__form:focus {
     outline: none;
+}
+
+.user_details__form {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    background: #ffffff;
+    border-radius: 5px;
+
+    .name__container,
+    .contact_details__container,
+    .location__container {
+        margin-bottom: 15px;
+    }
+
+    .MuiFormControl-root {
+        margin: 0 10px;
+    }
 }

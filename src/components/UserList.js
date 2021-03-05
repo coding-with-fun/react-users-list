@@ -13,7 +13,9 @@ import { UserContext } from '../context/UserContext';
 import UserModal from './UserModal';
 
 const UserList = () => {
-    const { userList, ToggleUserModal } = useContext(UserContext);
+    const { userList, isUserDetailsModalOpen, ToggleUserModal } = useContext(
+        UserContext
+    );
 
     const columns = ['Name', 'Email Address', 'City', 'State', 'Country'];
 
@@ -108,7 +110,7 @@ const UserList = () => {
                 />
             </Paper>
 
-            <UserModal />
+            {isUserDetailsModalOpen && <UserModal />}
         </Fragment>
     );
 };

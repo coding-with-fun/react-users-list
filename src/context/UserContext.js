@@ -20,7 +20,6 @@ export const UserProvider = (props) => {
     };
 
     const ToggleUserModal = (value, flag) => {
-        console.log(value, flag);
         setUserDetails(value);
         setIsUserDetailsModalOpen(flag);
     };
