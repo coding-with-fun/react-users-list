@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../context/UserContext';
-import { Modal, Backdrop, Fade, TextField, Grid } from '@material-ui/core';
+import { Modal, Backdrop, Fade, TextField } from '@material-ui/core';
 
 const UserModal = () => {
     const { userDetails, isUserDetailsModalOpen, ToggleUserModal } = useContext(
