@@ -1,0 +1,13 @@
+.user_list__container {
+    .table_header {
+        .table_header__cell {
+            font-weight: 600;
+            background: #dadada;
+        }
+    }
+
+    .table_row {
+        cursor: pointer;
+        user-select: none;
+    }
+}

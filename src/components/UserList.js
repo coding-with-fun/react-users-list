@@ -30,14 +30,18 @@ const UserList = () => {
     };
 
     return (
-        <Paper>
+        <Paper className='user_list__container'>
             <TableContainer>
                 <Table stickyHeader aria-label='sticky table'>
-                    <TableHead>
+                    <TableHead className='table_header'>
                         <TableRow>
                             {columns.map((column) => {
                                 return (
-                                    <TableCell key={column} align={'center'}>
+                                    <TableCell
+                                        key={column}
+                                        align={'center'}
+                                        className='table_header__cell'
+                                    >
                                         {column}
                                     </TableCell>
                                 );
@@ -66,6 +70,7 @@ const UserList = () => {
                                             role='checkbox'
                                             tabIndex={-1}
                                             key={user.id.value}
+                                            className='table_row'
                                         >
                                             {tempUserList.map(
                                                 (userDetail, index) => {
